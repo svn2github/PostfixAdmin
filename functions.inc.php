@@ -1200,6 +1200,7 @@ function pacrypt ($pw, $pw_db="")
         $split_method = preg_split ('/:/', $CONF['encrypt']);
         $method       = strtoupper($split_method[1]);
         if (! preg_match("/^[A-Z0-9-]+$/", $method)) { die("invalid dovecot encryption method"); }  # TODO: check against a fixed list?
+        if (strtolower($method) == 'md5-crypt') die("\$CONF['encrypt'] = 'dovecot:md5-crypt' will not work because dovecotpw generates a random salt each time. Please use \$CONF['encrypt'] = 'md5crypt' instead."); 
 
         $dovecotpw = "dovecotpw";
         if (!empty($CONF['dovecotpw'])) $dovecotpw = $CONF['dovecotpw'];
@@ -1788,6 +1789,9 @@ function db_in_clause($field, $values) {
 function table_by_key ($table_key)
 {
     global $CONF;
+# TODO: FIXME:
+# - breaks if database_prefix != "" and database_tables[$table_key] is not set
+# - should always prepend database_prefix, even if database_tables[$table_key] is not set
     $table = $CONF['database_prefix'].$CONF['database_tables'][$table_key];
     if (empty($table)) $table = $table_key;
     return $table;
