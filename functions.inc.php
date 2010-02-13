@@ -1789,11 +1789,8 @@ function db_in_clause($field, $values) {
 function table_by_key ($table_key)
 {
     global $CONF;
-# TODO: FIXME:
-# - breaks if database_prefix != "" and database_tables[$table_key] is not set
-# - should always prepend database_prefix, even if database_tables[$table_key] is not set
     $table = $CONF['database_prefix'].$CONF['database_tables'][$table_key];
-    if (empty($table)) $table = $table_key;
+    if (empty($table)) $table = $CONF['database_prefix'].$table_key;
     return $table;
 }
 
