@@ -1789,9 +1789,13 @@ function db_in_clause($field, $values) {
 function table_by_key ($table_key)
 {
     global $CONF;
-    $table = $CONF['database_prefix'].$CONF['database_tables'][$table_key];
-    if (empty($table)) $table = $CONF['database_prefix'].$table_key;
-    return $table;
+    if (empty($CONF['database_tables'][$table_key])) {
+        $table = $table_key;
+    } else {
+        $table = $CONF['database_tables'][$table_key];
+    }
+
+    return $CONF['database_prefix'].$table;
 }
 
 
