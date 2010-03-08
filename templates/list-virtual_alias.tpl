@@ -20,7 +20,7 @@
 			<td>{$item.goto|replace:",":"<br/>"}</td>
 		{/if}
 		<td>{$item.modified}</td>
-		{if $authentication_has_role.global_admin===true}
+		{if $authentication_has_role.global_admin==true}
 			{assign var="address" value=$item.address|escape:"url"}
 			<td><a href="edit-active.php?alias={$item.address|escape:"url"}&amp;domain={$fDomain|escape:"url"}&amp;return={$file|escape:"url"}?domain={$fDomain|escape:"url"}&amp;limit={$current_limit|escape:"url"}">{if $item.active==1}{$PALANG.YES}{else}{$PALANG.NO}{/if}</a></td>
 			<td><a href="edit-alias.php?address={$item.address|escape:"url"}&amp;domain={$fDomain|escape:"url"}">{$PALANG.edit}</a></td>
