@@ -48,9 +48,9 @@
 			{if $CONF.vacation_control_admin===YES && $CONF.vacation===YES}
 				{if $item.v_active!==-1}
 					{if $item.v_active==1}
-						{assign var="v_active" value=$PALANG.pOverview_vacation_edit"}
+						{assign var="v_active" value=$PALANG.pOverview_vacation_edit}
 					{else}
-						{assign var="v_active" value=$PALANG.pOverview_vacation_option"}
+						{assign var="v_active" value=$PALANG.pOverview_vacation_option}
 					{/if}
 					<td><a href="edit-vacation.php?username={$item.username|escape:"url"}&amp;domain={$fDomain|escape:"url"}">{$v_active}</a></td>
 				{/if}
