@@ -435,7 +435,7 @@ $smarty->assign ('select_options', select_options ($list_domains, array ($fDomai
 $smarty->assign ('nav_bar_alias', array ('top' => $nav_bar_alias->display_top (), 'bottom' => $nav_bar_alias->display_bottom ()), false);
 $smarty->assign ('nav_bar_mailbox', array ('top' => $nav_bar_mailbox->display_top (), 'bottom' => $nav_bar_mailbox->display_bottom ()), false);
 
-$smarty->assign ('fDomain', $fDomain);
+$smarty->assign ('fDomain', $fDomain, false);
 
 $smarty->assign ('list_domains', $list_domains);
 $smarty->assign ('limit', $limit);

@@ -165,15 +165,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST")
       }
    }
 }
-
-$fAddress = htmlentities($fAddress, ENT_QUOTES);
-$fDomain = htmlentities($fDomain, ENT_QUOTES);
+// never used?
+//$fDomain = htmlentities($fDomain, ENT_QUOTES);
 
 $array = preg_split ('/,/', $tGoto);
 // TOCHECK
 $array = $alias_list;
 
-$smarty->assign ('fAddress', $fAddress, false);
+$smarty->assign ('fAddress', $fAddress);
 $smarty->assign ('array', $array, false);
 $smarty->assign ('tMessage', $tMessage, false);
 $smarty->assign ('smarty_template', 'edit-alias');
