@@ -137,7 +137,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST")
    {
 	  if($CONF['alias_control_admin'] == 'NO' && !authentication_has_role('global-admin')) {
 		  // if original record had a mailbox alias, so ensure the updated one does too.
-		  if(in_array($orig_alias_list, $fAddress)) {
+		  if(in_array($fAddress, $orig_alias_list)) {
 			  $new_aliases[] = $fAddress;
 		  }
 	  }
