@@ -24,8 +24,7 @@
  *
  * -none-
  */
-header ("Location: login.php");
+header ("Location: main.php");
 exit;
 
 /* vim: set expandtab softtabstop=4 tabstop=4 shiftwidth=4: */
-?>
