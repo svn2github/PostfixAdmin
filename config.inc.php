@@ -147,6 +147,12 @@ $CONF['domain_path'] = 'NO';
 //   NO:  /usr/local/virtual/domain.tld/username
 // Note: If $CONF['domain_path'] is set to NO, this setting will be forced to YES.
 $CONF['domain_in_mailbox'] = 'YES';
+// If you want to define your own function to generate a maildir path set this to the name of the function.
+// Notes: 
+//   - this configuration directive will override both domain_path and domain_in_mailbox
+//   - the maildir_name_hook() function example is present in functions.inc.php comments
+//   - if the function does not exist the program will default to the above domain_path and domain_in_mailbox settings
+$CONF['maildir_name_hook'] = 'NO';
 
 // Default Domain Values
 // Specify your default values below. Quota in MB.

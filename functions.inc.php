@@ -2372,7 +2372,28 @@ function boolconf($setting) {
     }
 }
 
++/*
+	maildir_name_hook
+ 
+	Called by create-mailbox.php if $CONF['maildir_name_hook'] == 'YES'
+	- allows for customized maildir paths determined by a custom function
+	- the below example will return append a single-character directory to the
+		beginning of the maildir, splitting domains more or less evenly over
+		36 directories for improved filesystem performance with large numbers
+		of domains.
+	
+	Returns: maildir path
+		ie. I/example.com/user/
+  */
+/*
+function maildir_name_hook($domain, $user) {
+	$chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
+	$dir_index = hexdec(substr(md5($domain), 28)) % strlen($chars);
+	$dir = substr($chars, $dir_index, 1);
+	return sprintf("%s/%s/%s/", $dir, $domain, $user);
+}
+  */
 
 $table_admin = table_by_key ('admin');
 $table_alias = table_by_key ('alias');
