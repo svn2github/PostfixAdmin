@@ -11,7 +11,7 @@
 # (26/10/2009) 
 
 use Cyrus::IMAP::Admin;
-require '/var/www/postfixadmin/ADDITIONS/cyrus/cyrus.conf';
+require '/etc/mail/postfixadmin/cyrus.conf';
 use strict;
 use vars qw($cyrus_user $cyrus_password $cyrus_host);
 
