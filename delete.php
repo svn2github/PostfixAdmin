@@ -148,6 +148,14 @@ elseif ($fTable == "alias" or $fTable == "mailbox")
                 db_query ("DELETE FROM $table_vacation WHERE email='$fDelete' AND domain='$fDomain'");
                 db_query ("DELETE FROM $table_vacation_notification WHERE on_vacation ='$fDelete' "); /* should be caught by cascade, if PgSQL */
             }
+            $result = db_query("SELECT * FROM $table_quota WHERE username='$fDelete'");
+            if($result['rows'] >= 1) {
+                db_query ("DELETE FROM $table_quota WHERE username='$fDelete'");
+            }
+            $result = db_query("SELECT * FROM $table_quota2 WHERE username='$fDelete'");
+            if($result['rows'] == 1) {
+                db_query ("DELETE FROM $table_quota2 WHERE username='$fDelete'");
+            }
         }
 
         if ($error != 1)
