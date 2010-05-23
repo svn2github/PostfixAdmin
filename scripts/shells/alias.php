@@ -1,7 +1,7 @@
 <?php
 
 
-class PostfixAdminUser extends Shell {
+class PostfixAdminAlias extends Shell {
 
 /**
  * Contains tasks to load and instantiate
@@ -51,7 +51,7 @@ class PostfixAdminUser extends Shell {
                                                 "\t\t".sprintf("%-20s %s", "view: ",  "View an existing alias.")."\n".
                                                 "\t\t".sprintf("%-20s %s", "add: ",  "Adds an alias.")."\n".
                                                 "\t\t".sprintf("%-20s %s", "update: ",  "Updates an alias.")."\n".
-                                                "\t\t".sprintf("%-20s %s", "delete: ",  "Deletes an alias")."\n".
+                                                "\t\t".sprintf("%-20s %s", "delete: ",  "Deletes an alias")."\n",
                         'address' => "\t[<address>]\n" .
                                                 "\t\tA address of recipient.\n",
                 );
@@ -185,11 +185,11 @@ class UpdateTask extends Shell {
                 $this->hr();
         $this->out("Not Implemented yet! If you want to change a password use the password command.");
                 /*$this->out("Usage: postfixadmin-cli user update <args>");
-                $this->hr();
-                $this->out('Commands:');
-                $this->out("\n\tmodel\n\t\tbakes model in interactive mode.");
-                $this->out("\n\tmodel <name>\n\t\tbakes model file with no associations or validation");
-                $this->out("");*/
+                //$this->hr();
+                //$this->out('Commands:');
+                //$this->out("\n\tmodel\n\t\tbakes model in interactive mode.");
+                //$this->out("\n\tmodel <name>\n\t\tbakes model file with no associations or validation");
+                //$this->out("");*/
                 $this->_stop();
         }
 
@@ -203,12 +203,14 @@ class DeleteTask extends Shell {
         function execute() {
 
                 if (empty($this->args)) {
-                        $this->__interactive();
+                        $this->help();
+                        //$this->__interactive();
                 }
 
                 if (!empty($this->args[0])) {
-                       $output = $this->__handle($this->args[0]);
-                       $this->out($output);
+                     $this->help();
+                      // $output = $this->__handle($this->args[0]);
+                      // $this->out($output);
                        
                 }
         }
@@ -261,12 +263,13 @@ class DeleteTask extends Shell {
  */
         function help() {
                 $this->hr();
-                $this->out("Usage: postfixadmin-cli user model <arg1>");
-                $this->hr();
-                $this->out('Commands:');
-                $this->out("\n\tdelete\n\t\tdeletes mailbox in interactive mode.");
-                $this->out("\n\tdelete <address>\n\t\tdeletes mailbox with address <address>");
-                $this->out("");
+                $this->out("NOT implemented yet.");
+                //$this->out("Usage: postfixadmin-cli user model <arg1>");
+                //$this->hr();
+                //$this->out('Commands:');
+                //$this->out("\n\tdelete\n\t\tdeletes mailbox in interactive mode.");
+                //$this->out("\n\tdelete <address>\n\t\tdeletes mailbox with address <address>");
+                //$this->out("");
                 $this->_stop();
         }
 
@@ -406,8 +409,7 @@ class ViewTask extends Shell {
                 }
 
                 if (!empty($this->args[0])) {
-                       $output = $this->__handle($this->args[0]);
-                       $this->out($output);
+                        $this->__handle($this->args[0]);
                        
                 }
         }
@@ -417,7 +419,7 @@ class ViewTask extends Shell {
  * @access private
  */
         function __interactive() {
-                $question[] = "Which Address do you want to view?";
+                $question[] = "Which Alias do you want to view?";
 
                 $address = $this->in(join("\n", $question));
 
@@ -434,18 +436,16 @@ class ViewTask extends Shell {
         function __handle($address) {
 
 
-                $handler =  new UserHandler($address);
-                $status = $handler->view();
+                $handler =  new AliasHandler($address);
+                $status = $handler->get($address);
                 if ($status == 0) {
                       $result = $handler->return;
+
                       $this->out(sprintf("Entries for: %s\n", $address));
-                      $this->out("");
-                      $this->out(sprintf("+%'-25s+%'-15s+%'-10s+%'-20s+%'-8s+%'-8s+%'-6s+",'','','','','','',''));
-                      $this->out(sprintf('|%25s|%15s|%10s|%20s|%8s|%8s|%6s|', 'Address', 'Name', 'Quota', 'Dir', 'Created', 'Modified', 'Active'));
-                      $this->out(sprintf("+%'-25s+%'-15s+%'-10s+%'-20s+%'-8s+%'-8s+%'-6s+",'','','','','','',''));
-                      $this->out(sprintf('|%25s|%15s|%10s|%20s|%8s|%8s|%6s|', $result['username'], $result['name'], $result['quota'], $result['maildir'], $result['created'], $result['modified'], $result['active']));
-                      $this->out(sprintf("+%'-25s+%'-15s+%'-10s+%'-20s+%'-8s+%'-8s+%'-6s+",'','','','','','',''));
-                      
+                      $this->out("Goto: \t");
+                      foreach($result AS $goto) {
+                        $this->out("\t -> ".$goto);
+                      }
                 }
                 return;
         

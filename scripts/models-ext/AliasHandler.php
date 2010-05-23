@@ -19,11 +19,11 @@ class AliasHandler {
      * (may be an empty list, especially if $CONF['alias_control'] is turned off...
      * @param boolean - by default we don't return special addresses (e.g. vacation and mailbox alias); pass in true here if you wish to.
      */
-    public function get($all=false) {
-        $username = escape_string($this->username);
+    public function get($alias, $all=false) {
+        $alias = escape_string($alias);
         $table_alias = table_by_key('alias');
 
-        $sql = "SELECT * FROM $table_alias WHERE address='$username'";
+        $sql = "SELECT * FROM $table_alias WHERE address='$alias'";
         $result = db_query($sql);
         if($result['rows'] == 1) {
             $row = db_array ($result['result']);
@@ -45,9 +45,10 @@ class AliasHandler {
                 }
             }
             $list = $new_list;
-            return $list;
+            $this->return = $list;
+            return 0;
         }
-        return array();
+        return 1;
     }
 
    /** 

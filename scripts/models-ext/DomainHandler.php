@@ -73,6 +73,22 @@ class DomainHandler {
          db_log($this->username, $domain, 'create_domain', "");
       return 0;
     }
+    
+    public function view ($domain) {
+        global $config;
+
+        
+
+        $table_domain = table_by_key('domain');
+        
+        $result = db_query("SELECT domain, description, aliases, mailboxes, maxquota, quota, transport, backupmx,  DATE_FORMAT(created, '%d.%m.%y') AS created, DATE_FORMAT(modified, '%d.%m.%y') AS modified, active FROM $table_domain WHERE domain='$domain'");
+        if ($result['rows'] != 0) {
+          $this->return = db_array($result['result']);
+          return 0;
+        }
+        $this->errormsg = $result['error'];
+        return 1;
+    }
 }
 
 /* vim: set expandtab softtabstop=4 tabstop=4 shiftwidth=4: */

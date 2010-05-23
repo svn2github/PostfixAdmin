@@ -216,7 +216,7 @@ class UpdateTask extends Shell {
  */
         function help() {
                 $this->hr();
-        $this->out("Not Implemented yet! If you want to change a password use the password command.");
+        $this->out("Not Implemented yet! ");
                 /*$this->out("Usage: postfixadmin-cli user update <args>");
                 $this->hr();
                 $this->out('Commands:');
@@ -236,12 +236,14 @@ class DeleteTask extends Shell {
         function execute() {
 
                 if (empty($this->args)) {
-                        $this->__interactive();
+                $this->help();
+                        //$this->__interactive();
                 }
 
                 if (!empty($this->args[0])) {
-                       $output = $this->__handle($this->args[0]);
-                       $this->out($output);
+                $this->help();
+                       //$output = $this->__handle($this->args[0]);
+                       //$this->out($output);
                        
                 }
         }
@@ -293,13 +295,14 @@ class DeleteTask extends Shell {
  * @access public
  */
         function help() {
+                $this->out("NOT Implemented yet.");
                 $this->hr();
                 $this->out("Usage: postfixadmin-cli user model <arg1>");
                 $this->hr();
-                $this->out('Commands:');
-                $this->out("\n\tdelete\n\t\tdeletes mailbox in interactive mode.");
-                $this->out("\n\tdelete <address>\n\t\tdeletes mailbox with address <address>");
-                $this->out("");
+                //$this->out('Commands:');
+                //$this->out("\n\tdelete\n\t\tdeletes mailbox in interactive mode.");
+                //$this->out("\n\tdelete <address>\n\t\tdeletes mailbox with address <address>");
+                //$this->out("");
                 $this->_stop();
         }
 
@@ -312,24 +315,25 @@ class PasswordTask extends Shell {
  */
         function execute() {
                 if (empty($this->args)) {
-                        $this->__interactive();
+                $this->help();
+                //        $this->__interactive();
                 }
 
                 if (!empty($this->args[0])) {
-                
-                        $address = $this->args[0];
+                $this->help();
+                        //$address = $this->args[0];
                         
-                        if (isset($this->params['g']) && $this->params['g'] == true ) {
-                            $random = true;
-                            $password = NULL;
-                        } elseif  (isset($this->args[1]) && length($this->args[1]) > 8) {
-                            $password = $this->args[1];
-                        } else {
+                        //if (isset($this->params['g']) && $this->params['g'] == true ) {
+                        //    $random = true;
+                        //   $password = NULL;
+                        //} elseif  (isset($this->args[1]) && length($this->args[1]) > 8) {
+                         //   $password = $this->args[1];
+                        //} else {
 
-                            $this->Dispatch->stderr('Missing <newpw> or -g. Falling back to interactive mode.');
-                            $this->__interactive();
-                        }
-                        $this->__handle($address, $password, $random);
+                        //    $this->Dispatch->stderr('Missing <newpw> or -g. Falling back to interactive mode.');
+                         //   $this->__interactive();
+                        //}
+                        //$this->__handle($address, $password, $random);
                 
                         
                 }
@@ -414,7 +418,7 @@ class PasswordTask extends Shell {
  * @access public
  */
         function help() {
-                $this->out("");
+                $this->out("NOT implemented yet.");
                 $this->hr();
                 $this->out("Usage: postfixadmin-cli user password <address> [<newpw>] [-g]");
                 $this->hr();
@@ -450,11 +454,11 @@ class ViewTask extends Shell {
  * @access private
  */
         function __interactive() {
-                $question[] = "Which Address do you want to view?";
+                $question[] = "Which Domain do you want to view?";
 
-                $address = $this->in(join("\n", $question));
+                $domain = $this->in(join("\n", $question));
 
-                      $this->__handle($address);
+                      $this->__handle($domain);
 
 
         
@@ -464,20 +468,24 @@ class ViewTask extends Shell {
  *
  * @access private
  */
-        function __handle($address) {
+        function __handle($domain) {
 
 
-                $handler =  new UserHandler($address);
-                $status = $handler->view();
+                $handler =  new DomainHandler('CONSOLE');
+                $status = $handler->view($domain);
                 if ($status == 0) {
                       $result = $handler->return;
-                      $this->out(sprintf("Entries for: %s\n", $address));
-                      $this->out("");
-                      $this->out(sprintf("+%'-25s+%'-15s+%'-10s+%'-20s+%'-8s+%'-8s+%'-6s+",'','','','','','',''));
-                      $this->out(sprintf('|%25s|%15s|%10s|%20s|%8s|%8s|%6s|', 'Address', 'Name', 'Quota', 'Dir', 'Created', 'Modified', 'Active'));
-                      $this->out(sprintf("+%'-25s+%'-15s+%'-10s+%'-20s+%'-8s+%'-8s+%'-6s+",'','','','','','',''));
-                      $this->out(sprintf('|%25s|%15s|%10s|%20s|%8s|%8s|%6s|', $result['username'], $result['name'], $result['quota'], $result['maildir'], $result['created'], $result['modified'], $result['active']));
-                      $this->out(sprintf("+%'-25s+%'-15s+%'-10s+%'-20s+%'-8s+%'-8s+%'-6s+",'','','','','','',''));
+                      $this->out("Domain: \t".$result['domain']);
+                      $this->out("Description: \t".$result['description']);
+                      $this->out("Aliases: \t".$result['aliases']);
+                      $this->out("Mailboxes: \t".$result['mailboxes']);
+                      $this->out("Max. Quota: \t".$result['maxquota']);
+                      $this->out("Transport: \t".$result['transport']);
+                      $this->out("Backup MX: \t".$result['backupmx']);
+                      $this->out("Active: \t".$result['active']);
+                      $this->out("Modified: \t".$result['modified']);
+                      $this->out("Created: \t".$result['created']);
+
                       
                 }
                 return;
