@@ -1362,7 +1362,8 @@ function smtp_mail ($to, $from, $data)
     global $CONF;
     $smtpd_server = $CONF['smtp_server'];
     $smtpd_port = $CONF['smtp_port'];
-    $smtp_server = $_SERVER["SERVER_NAME"];
+    //$smtp_server = $_SERVER["SERVER_NAME"];
+    $smtp_server = php_uname("n");
     $errno = "0";
     $errstr = "0";
     $timeout = "30";
@@ -1736,12 +1737,15 @@ function db_update ($table, $where, $values, $timestamp = array())
  * Action: Logs actions from admin
  * Call: db_log (string username, string domain, string action, string data)
  * Possible actions are:
+ * 'create_domain'
  * 'create_alias'
  * 'create_alias_domain'
  * 'create_mailbox'
+ * 'delete_domain'
  * 'delete_alias'
  * 'delete_alias_domain'
  * 'delete_mailbox'
+ * 'edit_domain'
  * 'edit_alias'
  * 'edit_alias_state'
  * 'edit_alias_domain_state'
@@ -1753,9 +1757,9 @@ function db_log ($username,$domain,$action,$data)
 {
     global $CONF;
     global $table_log;
-    $REMOTE_ADDR = $_SERVER['REMOTE_ADDR'];
+    $REMOTE_ADDR = getRemoteAddr();
 
-    $action_list = array('create_alias', 'create_alias_domain', 'delete_alias', 'delete_alias_domain', 'edit_alias', 'create_mailbox', 'delete_mailbox', 'edit_mailbox', 'edit_alias_state', 'edit_alias_domain_state', 'edit_mailbox_state', 'edit_password');
+    $action_list = array(  'create_domain', 'create_alias', 'create_alias_domain','delete_domain', 'delete_alias', 'delete_alias_domain','edit_domain', 'edit_alias', 'create_mailbox', 'delete_mailbox', 'edit_mailbox', 'edit_alias_state', 'edit_alias_domain_state', 'edit_mailbox_state', 'edit_password');
 
     if(!in_array($action, $action_list)) {
         die("Invalid log action : $action");   // could do with something better?
@@ -2349,6 +2353,12 @@ function create_admin($fUsername, $fPassword, $fPassword2, $fDomains, $no_genera
     );
 
 
+}
+function getRemoteAddr() {
+    $REMOTE_ADDR = 'localhost';
+    if (isset($_SERVER['REMOTE_ADDR'])) 
+        $REMOTE_ADDR = $_SERVER['REMOTE_ADDR'];
+    return $REMOTE_ADDR;
 }
 
 
