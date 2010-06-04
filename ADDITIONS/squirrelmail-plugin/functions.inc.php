@@ -51,6 +51,7 @@ function get_xmlrpc() {
             }
             catch(Exception $e) {
                 //var_dump($client->getHttpClient()->getLastResponse()->getBody());
+                error_log("Failed to login to xmlrpc instance - " . $e->getMessage);
                 die('Failed to login to xmlrpc instance');
             }
             if($success) {
