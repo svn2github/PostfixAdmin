@@ -64,8 +64,8 @@ if ($fAddress == "") {
          $tGoto = $row['goto'];
 		 $orig_alias_list = explode(',', $tGoto);
 		 $alias_list = $orig_alias_list;
-		 //. if we are not a global admin, and special_alias_control is NO, hide the alias that's the mailbox name.
-		 if($CONF['special_alias_control'] == 'NO' && !authentication_has_role('global-admin')) {
+		 //. if we are not a global admin, and alias_control_admin is NO, hide the alias that's the mailbox name.
+		 if($CONF['alias_control_admin'] == 'NO' && !authentication_has_role('global-admin')) {
 
          /* Has a mailbox as well? Remove the address from $tGoto in order to edit just the real aliases */
          $result = db_query ("SELECT * FROM $table_mailbox WHERE username='$fAddress' AND domain='$fDomain'");
