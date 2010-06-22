@@ -1579,7 +1579,7 @@ function db_query ($query, $ignore_errors = 0)
     if ($error_text != "" && $ignore_errors == 0) die($error_text);
 
     if ($error_text == "") {
-        if (preg_match("/^SELECT/i", $query))
+        if (preg_match("/^SELECT/i", trim($query)))
         {
             // if $query was a SELECT statement check the number of rows with [database_type]_num_rows ().
             if ($CONF['database_type'] == "mysql") $number_rows = mysql_num_rows ($result);
