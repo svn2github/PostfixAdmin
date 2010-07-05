@@ -23,6 +23,8 @@ be viewed real-time in Postfixadmin.
 
 default_mail_env = maildir:/var/mail/vmail/%u/
 
+(dovecot 1.0.7 calls this mail_location ... ie.. mail_location = maildir:/...../%u )
+
 auth default {
   mechanisms plain
   userdb sql {
