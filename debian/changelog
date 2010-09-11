@@ -1,3 +1,16 @@
+postfixadmin (2.3.2) unstable; urgency=low
+
+  * New upstream release
+
+ -- David Goodwin <david.goodwin@palepurple.co.uk>  Mon, 23 Aug 2010 11:24:00 +0100
+
+postfixadmin (2.3.1) unstable; urgency=low
+
+  * New upstream release
+  * Updated .deb standards (thanks normes)
+
+ -- David Goodwin <david.goodwin@palepurple.co.uk>  Thu, 08 Jul 2010 22:20:14 +0100
+
 postfixadmin (2.3) unstable; urgency=low
 
   * Initial release (Closes: #247225)

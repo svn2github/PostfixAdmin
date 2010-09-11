@@ -450,7 +450,8 @@ function get_domain_properties ($domain)
     //while loop to figure index names. use page_size and loop of queries
     $i=0;
     $current=0;
-    $page_size = $CONF['page_size'];
+    $page_size = (int) $CONF['page_size'];
+    if ($page_size < 1) die ("\$CONF['page_size'] = '$page_size' is invalid (it may only contain digits and must be >= 1)");
     $tmpstr="";
     $idxlabel="";
     $list['alias_pgindex_count'] = 0;

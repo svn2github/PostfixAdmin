@@ -196,7 +196,7 @@ if ($result['rows'] > 0)
 # mailboxes
 #
 
-$display_mailbox_aliases = boolconf('special_alias_control'); # TODO: is this condition correct? - I'm slightly confused with alias_control, alias_control_admin and special_alias_control
+$display_mailbox_aliases = boolconf('alias_control_admin');
 
 # build the sql query
 $sql_select = " SELECT $table_mailbox.* ";
@@ -234,7 +234,7 @@ if (boolconf('used_quotas') && boolconf('new_quota_table')) {
 if (boolconf('used_quotas') && ( ! boolconf('new_quota_table') ) ) {
     $sql_select .= ", $table_quota.current ";
     $sql_join   .= " LEFT JOIN $table_quota ON $table_mailbox.username=$table_quota.username ";
-    $sql_where  .= " ( $table_quota.path='quota/storage' OR  $table_quota.path IS NULL ) ";
+    $sql_where  .= " AND ( $table_quota.path='quota/storage' OR  $table_quota.path IS NULL ) ";
 }
 
 $query = "$sql_select\n$sql_from\n$sql_join\n$sql_where\n$sql_order\n$sql_limit";

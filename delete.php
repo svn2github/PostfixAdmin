@@ -68,6 +68,7 @@ elseif ($fTable == "domain")
     $result_domain_admins = db_delete ($table_domain_admins,$fWhere,$fDelete);
     $result_alias = db_delete ($table_alias,$fWhere,$fDelete);
     $result_mailbox = db_delete ($table_mailbox,$fWhere,$fDelete);
+    $result_alias_domain = db_delete($table_alias_domain,'alias_domain',$fDelete);
     $result_log = db_delete ($table_log,$fWhere,$fDelete);
     if ($CONF['vacation'] == "YES")
     {

@@ -32,7 +32,7 @@ if (authentication_has_role('global-admin')) {
 //if (authentication_has_role('admin')) {
    $list_admins = list_admins ();
    $is_superadmin = 1;
-   $fUsername = safepost('fUsername', safeget('username')); # prefer POST over GET variable
+   $fUsername = escape_string(safepost('fUsername', safeget('username'))); # prefer POST over GET variable
    if ($fUsername != "") $admin_properties = get_admin_properties($fUsername);
 } else {
    $list_admins = array(authentication_get_username());
