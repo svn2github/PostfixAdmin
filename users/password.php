@@ -73,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST")
     }
 }
 
-$smarty->assign ('USERID_USERNAME', $USERID_USERNAME);
+$smarty->assign ('USERID_USERNAME', $username);
 //$smarty->assign ('pPassword_admin_text', $pPassword_admin_text);
 $smarty->assign ('pPassword_password_current_text', $pPassword_password_current_text, false);
 $smarty->assign ('pPassword_password_text', $pPassword_password_text, false);

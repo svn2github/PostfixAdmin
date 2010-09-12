@@ -90,6 +90,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST")
     if($error === 0) {
         foreach($goto as $address) {
           if ($address != "") { # $goto[] may contain a "" element
+            # TODO - from https://sourceforge.net/tracker/?func=detail&aid=3027375&group_id=191583&atid=937964 
+            # The not-so-good news is that some internals of edit-alias aren't too nice
+            # - for example, $goto[] can contain an element with empty string. I added a
+            # check for that in the 2.3 branch, but we should use a better solution
+            # (avoid empty elements in $goto) in trunk ;-)
             if(!check_email($address)) {
                 $error += 1;
                 $tMessage = $PALANG['pEdit_alias_goto_text_error2'] . " $address</font>";

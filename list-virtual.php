@@ -199,7 +199,7 @@ if ($result['rows'] > 0)
 $display_mailbox_aliases = boolconf('alias_control_admin');
 
 # build the sql query
-$sql_select = " SELECT $table_mailbox.* ";
+$sql_select = "SELECT $table_mailbox.* ";
 $sql_from   = " FROM $table_mailbox ";
 $sql_join   = "";
 $sql_where  = " WHERE ";
@@ -454,11 +454,11 @@ if(is_array($tTargetDomain))
 	$smarty->assign ('PALANG_pOverview_alias_domain_target', sprintf($PALANG['pOverview_alias_domain_target'], $fDomain));
 }
 $smarty->assign ('tAlias', $tAlias);
-$smarty->assign ('gen_show_status', $gen_show_status);
+$smarty->assign ('gen_show_status', $gen_show_status, false);
 $smarty->assign ('check_alias_owner', $check_alias_owner);
 $smarty->assign ('tCanAddAlias', $tCanAddAlias);
 $smarty->assign ('tMailbox', $tMailbox);
-$smarty->assign ('gen_show_status_mailbox', $gen_show_status_mailbox);
+$smarty->assign ('gen_show_status_mailbox', $gen_show_status_mailbox, false);
 $smarty->assign ('boolconf_used_quotas', boolconf('used_quotas'));
 $smarty->assign ('divide_quota', $divide_quota);
 $smarty->assign ('tCanAddMailbox', $tCanAddMailbox);
