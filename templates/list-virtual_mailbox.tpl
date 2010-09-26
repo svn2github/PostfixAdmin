@@ -16,16 +16,27 @@
 			{if $CONF.show_status===YES}
 				<td>{$gen_show_status_mailbox[$i]}</td>
 			{/if}
-			<td>{$item.username}</td>
+			<td>
+				{if $search eq ""}
+					{$item.username}
+				{else}
+					{$item.username|replace:$search:"<span class='searchresult'>$search</span>"}
+				{/if}
+			</td>
 			{if $display_mailbox_aliases==true}
 				<td>
+				{if $item.goto_mailbox == 1}
+					Mailbox<br/>
+				{else}
+					Forward only<br/>
+				{/if}
 				{foreach from=$item.goto_other item=item2 key=j}
-				   {if $item.goto_mailbox == 1}
-				   	  Mailbox<br/>
-				   {else}
-					  Forward only<br/>
-				   {/if}
-			   	   {$item2}<br/>
+					{if $search eq ""}
+						{$item2}
+					{else}
+						{$item2|replace:$search:"<span class='searchresult'>$search</span>"}
+					{/if}
+					<br/>
 				{/foreach}
 				</td>
 			{/if}

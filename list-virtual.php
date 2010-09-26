@@ -437,6 +437,8 @@ $smarty->assign ('nav_bar_mailbox', array ('top' => $nav_bar_mailbox->display_to
 
 $smarty->assign ('fDomain', $fDomain, false);
 
+$smarty->assign ('search', $search);
+
 $smarty->assign ('list_domains', $list_domains);
 $smarty->assign ('limit', $limit);
 $smarty->assign ('tDisplay_back_show', $tDisplay_back_show);

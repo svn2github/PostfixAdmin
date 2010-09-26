@@ -311,6 +311,10 @@ div.setup li {
 	padding-bottom:1em;
 }
 
+.searchresult {
+	background:lightgreen;
+}
+
 div.nav_bar {
 	text-align: left;
 	width: 750px;

@@ -13,11 +13,23 @@
 		{if $CONF.show_status===YES}
 			<td>{$gen_show_status[$i]}</td>
 		{/if}
-		<td>{$item.address}</td>
+		<td>
+			{if $search eq ""}
+				{$item.address}
+			{else}
+				{$item.address|replace:$search:"<span class='searchresult'>$search</span>"}
+			{/if}
+		</td>
 		{if $CONF.alias_goto_limit>0}
 			<td><i>sorry, alias_goto_limit > 0 not handled</i></td>
 		{else}
-			<td>{$item.goto|replace:",":"<br/>"}</td>
+			<td>
+				{if $search eq ""}
+					{$item.goto|replace:",":"<br/>"}
+				{else}
+					{$item.goto|replace:",":"<br/>"|replace:$search:"<span class='searchresult'>$search</span>"}
+				{/if}
+			</td>
 		{/if}
 		<td>{$item.modified}</td>
 		{if $authentication_has_role.global_admin==true}
