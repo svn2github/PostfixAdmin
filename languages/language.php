@@ -31,6 +31,7 @@ $supported_languages = array(
     'pl'    => 'Polski - Polish',
     'pt-br' => 'Portugu&ecirc;s - Brazilian portuguese',
     'ru'    => '&#1056;&#1091;&#1089;&#1089;&#1082;&#1080;&#1081; - Russian',
+    'ro'    => 'Romana - Romanian',
     'sk'    => 'Sloven&#269;ina - Slovak',
     'sl'    => 'Sloven&scaron;&#269;ina - Slovenian',
     'sv'    => 'Svenska - Swedish',
