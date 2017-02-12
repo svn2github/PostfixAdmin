@@ -1,0 +1,10 @@
+PostfixAdmin development has moved to Github!
+=============================================
+
+Please head over to https://github.com/postfixadmin/postfixadmin/ for
+the latest PostfixAdmin code.
+
+SVN will no longer be updated.
+
+If you deploy PostfixAdmin from SVN, please switch over to Github
+(maybe we'll delete all files from SVN in a few months to enforce that ;-)
