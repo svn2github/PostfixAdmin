@@ -1,0 +1,13 @@
+PostfixAdmin development moved to GitHub.
+
+You can find the git repo and the issue tracker at
+    https://github.com/postfixadmin/postfixadmin/
+
+
+If you really need the code from this SVN, checkout revision 1899 which is the
+last revision before moving to github and svn rm'ing all files.
+This is _not recommended_ - the code in SVN is outdated and might contain bugs
+or even security issues that were not yet known at the time of writing this.
+
+
+-- February 2017, the PostfixAdmin developers
